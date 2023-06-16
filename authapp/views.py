@@ -2,7 +2,7 @@ from django.http import request
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistration, UserEditForm
-
+from src.decorators import authentication_not_required
 
 # Create your views here.
 
@@ -13,6 +13,7 @@ def dashboard(request):
     return render(request, "authapp/dashboard.html", context=context)
 
 
+@authentication_not_required
 def register(request):
     if request.method == "POST":
         form = UserRegistration(request.POST or None)
